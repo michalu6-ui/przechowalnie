@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Krótki test preferencji inspirowany MBTI.">
+  <title>Przechowalnie | Test osobowości</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="Przechowalnie, strona główna">
+        <span class="brand-mark">P</span>
+        <span>Przechowalnie</span>
+      </a>
+      <span class="eyebrow">LAB / 01</span>
+    </header>
+
+    <section class="intro" data-screen="intro">
+      <div class="intro-copy">
+        <p class="kicker">Test preferencji osobowości</p>
+        <h1>Zobacz, jak<br><em>myślisz.</em></h1>
+        <p class="lead">Odpowiedz intuicyjnie na 16 krótkich stwierdzeń. To nie diagnoza, tylko ciekawy punkt wyjścia do poznania własnych tendencji.</p>
+        <button class="button button-primary" data-action="start">Rozpocznij test <span aria-hidden="true">↗</span></button>
+      </div>
+      <div class="intro-art" aria-hidden="true">
+        <div class="orbit orbit-large"></div>
+        <div class="orbit orbit-small"></div>
+        <div class="signal">01<br><span>poznaj<br>swoją<br>perspektywę</span></div>
+        <div class="dot dot-one"></div><div class="dot dot-two"></div><div class="dot dot-three"></div>
+      </div>
+    </section>
+
+    <section class="quiz hidden" data-screen="quiz" aria-labelledby="question-title">
+      <div class="quiz-head">
+        <div>
+          <p class="kicker">Twoja perspektywa</p>
+          <p class="question-count"><span data-current>01</span> / 16</p>
+        </div>
+        <div class="progress-track" aria-label="Postęp testu"><span data-progress></span></div>
+      </div>
+      <div class="question-area">
+        <p class="question-number" data-question-number>PYTANIE 01</p>
+        <h2 id="question-title" data-question>Ładowanie pytania...</h2>
+        <div class="answers" role="group" aria-label="Wybierz odpowiedź">
+          <button class="answer" data-answer="0">Zdecydowanie nie</button>
+          <button class="answer" data-answer="1">Raczej nie</button>
+          <button class="answer" data-answer="2">Trudno powiedzieć</button>
+          <button class="answer" data-answer="3">Raczej tak</button>
+          <button class="answer" data-answer="4">Zdecydowanie tak</button>
+        </div>
+      </div>
+      <div class="quiz-foot"><span>Wybierz odpowiedź, która jest najbliższa Tobie.</span><button class="text-button" data-action="reset">Wyjdź z testu</button></div>
+    </section>
+
+    <section class="result hidden" data-screen="result" aria-labelledby="result-title">
+      <div class="result-heading">
+        <p class="kicker">Twój profil preferencji</p>
+        <div class="type-lockup"><span class="type-label">TYP</span><h2 id="result-title" data-type>INFP</h2></div>
+        <p class="result-summary" data-summary></p>
+      </div>
+      <div class="result-grid">
+        <div class="result-card result-card-dark">
+          <p class="card-label">Mapa preferencji</p>
+          <div class="scales" data-scales></div>
+        </div>
+        <div class="result-card result-card-light">
+          <p class="card-label">W skrócie</p>
+          <p class="result-description" data-description></p>
+          <p class="note">Wynik ma charakter orientacyjny i nie zastępuje profesjonalnego badania.</p>
+        </div>
+      </div>
+      <div class="result-actions"><button class="button button-primary" data-action="restart">Spróbuj ponownie <span aria-hidden="true">↗</span></button><button class="text-button" data-action="print">Zapisz wynik</button></div>
+    </section>
+
+    <footer class="footer"><span>PRZECHOWALNIE / 2026</span><span>TEST DO REFLEKSJI, NIE DO SZUFLADKOWANIA</span></footer>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
