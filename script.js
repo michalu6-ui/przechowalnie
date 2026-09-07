@@ -86,6 +86,13 @@ const avatarSymbols = {
   ISTP: 'FIX', ISFP: 'FORM', ESTP: 'NOW', ESFP: 'PLAY'
 };
 
+const avatarTraits = {
+  INTJ: { tool: 'TABLET', mood: 'focused' }, INTP: { tool: 'NOTES', mood: 'curious' }, ENTJ: { tool: 'KEYS', mood: 'firm' }, ENTP: { tool: 'MARKER', mood: 'playful' },
+  INFJ: { tool: 'MAPA', mood: 'calm' }, INFP: { tool: 'PENCIL', mood: 'soft' }, ENFJ: { tool: 'PHONE', mood: 'warm' }, ENFP: { tool: 'CAMERA', mood: 'bright' },
+  ISTJ: { tool: 'LISTA', mood: 'steady' }, ISFJ: { tool: 'MUG', mood: 'kind' }, ESTJ: { tool: 'CLIP', mood: 'firm' }, ESFJ: { tool: 'BAG', mood: 'warm' },
+  ISTP: { tool: 'TOOLS', mood: 'alert' }, ISFP: { tool: 'MUSIC', mood: 'dreamy' }, ESTP: { tool: 'WATCH', mood: 'bold' }, ESFP: { tool: 'HEADSET', mood: 'joyful' }
+};
+
 let current = 0;
 let answers = [];
 const screens = document.querySelectorAll('[data-screen]');
@@ -138,6 +145,8 @@ function renderResult() {
   roleStage.className = `role-stage ${roleGroup.className} scene-${roleGroup.scene} type-${type}`;
   document.querySelector('[data-role-avatar]').textContent = roleGroup.avatar;
   document.querySelector('[data-role-prop]').textContent = avatarSymbols[type];
+  document.querySelector('[data-role-tool]').textContent = avatarTraits[type].tool;
+  roleStage.dataset.mood = avatarTraits[type].mood;
   document.querySelector('[data-role-group]').textContent = roleGroup.label;
   document.querySelector('[data-role-title]').textContent = roleGroup.role;
   document.querySelector('[data-role-description]').textContent = roleGroup.description;
