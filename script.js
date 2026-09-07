@@ -60,6 +60,25 @@ const profiles = {
   ESFP: { name: 'Animator', summary: 'Obecność, spontaniczność i umiejętność wnoszenia lekkości oraz koloru do wspólnych doświadczeń.', healthy: 'Zauważasz ludzi, tworzysz atmosferę i odważnie czerpiesz z chwili bez udawania kogoś innego.', unhealthy: 'Możesz unikać ciszy, decyzji i trudnych emocji, przykrywając je aktywnością lub humorem.', career: 'Wydarzenia, media, sprzedaż, sztuka, edukacja, turystyka i praca z publicznością.', relationships: 'Zaleta: ciepło, hojność i radość bycia razem. Wyzwanie: zostań przy drugiej osobie także w cięższym momencie.', work: 'Zaleta: energia, kontakt z klientem i elastyczność. Wyzwanie: monotonia, budżet i praca bez natychmiastowej nagrody.' }
 };
 
+const roleGroups = {
+  INTJ: { label: 'Analitycy', className: 'group-analysts', role: 'Architekt systemów', description: 'Projektujesz rozwiązania, które łączą dalekosiężną wizję z precyzją.', avatar: 'AX', scene: 'city' },
+  INTP: { label: 'Analitycy', className: 'group-analysts', role: 'Laboratorium idei', description: 'Najlepiej działasz tam, gdzie pytania są ważniejsze niż gotowe odpowiedzi.', avatar: 'IQ', scene: 'city' },
+  ENTJ: { label: 'Analitycy', className: 'group-analysts', role: 'Strateg operacji', description: 'Widzisz planszę z góry i potrafisz nadać ludziom wspólny kierunek.', avatar: 'CX', scene: 'city' },
+  ENTP: { label: 'Analitycy', className: 'group-analysts', role: 'Łowca możliwości', description: 'Łączysz odległe pomysły i znajdujesz przejścia tam, gdzie inni widzą ścianę.', avatar: 'NX', scene: 'city' },
+  INFJ: { label: 'Dyplomaci', className: 'group-diplomats', role: 'Kartograf sensu', description: 'Pomagasz ludziom zobaczyć kierunek, który wcześniej był tylko przeczuciem.', avatar: 'SV', scene: 'nature' },
+  INFP: { label: 'Dyplomaci', className: 'group-diplomats', role: 'Opiekun wartości', description: 'Chronisz to, co autentyczne, i nadajesz pomysłom osobisty rytm.', avatar: 'EL', scene: 'nature' },
+  ENFJ: { label: 'Dyplomaci', className: 'group-diplomats', role: 'Budowniczy wspólnot', description: 'Wydobywasz z ludzi potencjał i tworzysz przestrzeń do współpracy.', avatar: 'JM', scene: 'nature' },
+  ENFP: { label: 'Dyplomaci', className: 'group-diplomats', role: 'Inspirator zmian', description: 'Rozpalasz ciekawość i widzisz przyszłość jako zbiór realnych możliwości.', avatar: 'OP', scene: 'nature' },
+  ISTJ: { label: 'Strażnicy', className: 'group-sentinels', role: 'Gwarant jakości', description: 'Budujesz stabilność dzięki konsekwencji, pamięci do szczegółów i rzetelności.', avatar: 'RK', scene: 'city' },
+  ISFJ: { label: 'Strażnicy', className: 'group-sentinels', role: 'Opiekun zespołu', description: 'Zauważasz potrzeby, o których inni jeszcze nie zdążyli powiedzieć.', avatar: 'MA', scene: 'nature' },
+  ESTJ: { label: 'Strażnicy', className: 'group-sentinels', role: 'Dowódca wykonania', description: 'Zamieniasz plan w rytm pracy, na którym inni mogą polegać.', avatar: 'VT', scene: 'city' },
+  ESFJ: { label: 'Strażnicy', className: 'group-sentinels', role: 'Gospodarz relacji', description: 'Łączysz porządek z troską i sprawiasz, że ludzie czują się częścią całości.', avatar: 'LA', scene: 'nature' },
+  ISTP: { label: 'Adventurers', className: 'group-adventurers', role: 'Operator terenu', description: 'Najlepiej reagujesz w ruchu, kiedy można sprawdzić rozwiązanie w praktyce.', avatar: 'ZX', scene: 'nature' },
+  ISFP: { label: 'Adventurers', className: 'group-adventurers', role: 'Twórca atmosfery', description: 'Dostrzegasz faktury, nastroje i detale, które nadają doświadczeniu charakter.', avatar: 'YU', scene: 'nature' },
+  ESTP: { label: 'Adventurers', className: 'group-adventurers', role: 'Inicjator akcji', description: 'Wchodzisz w sytuację z odwagą i szybko wyczuwasz, co zadziała teraz.', avatar: 'JR', scene: 'city' },
+  ESFP: { label: 'Adventurers', className: 'group-adventurers', role: 'Reżyser doświadczeń', description: 'Tworzysz energię, która pozwala ludziom być razem naprawdę, nie tylko formalnie.', avatar: 'KO', scene: 'city' }
+};
+
 let current = 0;
 let answers = [];
 const screens = document.querySelectorAll('[data-screen]');
@@ -93,6 +112,7 @@ function calculateType() {
 function renderResult() {
   const { type, subtype, scores } = calculateType();
   const profile = profiles[type];
+  const roleGroup = roleGroups[type];
   const { name, summary, description, healthy, unhealthy, career, relationships, work } = {
     ...profile,
     description: profile.summary
@@ -107,6 +127,12 @@ function renderResult() {
   document.querySelector('[data-subtype-letter]').textContent = subtype;
   document.querySelector('[data-subtype-name]').textContent = subtypeName;
   document.querySelector('[data-subtype-description]').textContent = subtypeDescription;
+  const roleStage = document.querySelector('[data-role-stage]');
+  roleStage.className = `role-stage ${roleGroup.className} scene-${roleGroup.scene}`;
+  document.querySelector('[data-role-avatar]').textContent = roleGroup.avatar;
+  document.querySelector('[data-role-group]').textContent = roleGroup.label;
+  document.querySelector('[data-role-title]').textContent = roleGroup.role;
+  document.querySelector('[data-role-description]').textContent = roleGroup.description;
   const pairs = [['E', 'I'], ['S', 'N'], ['T', 'F'], ['J', 'P']];
     const scaleMarkup = pairs.map(([left, right]) => {
     const total = scores[left] + scores[right] || 1;

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Krótki test preferencji inspirowany MBTI.">
-  <title>Przechowalnie | Test osobowości</title>
+  <title>MBTI TEST | Poznaj swój typ</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -13,9 +13,9 @@
 <body>
   <main class="shell">
     <header class="topbar">
-      <a class="brand" href="index.html" aria-label="Przechowalnie, strona główna">
-        <span class="brand-mark">P</span>
-        <span>Przechowalnie</span>
+      <a class="brand" href="index.html" aria-label="MBTI TEST, strona główna">
+        <span class="brand-mark">M</span>
+        <span>MBTI TEST</span>
       </a>
       <span class="eyebrow">LAB / 01</span>
     </header>
@@ -27,11 +27,9 @@
         <p class="lead">Odpowiedz intuicyjnie na 40 krótkich stwierdzeń. Zobaczysz procentowy rozkład liter MBTI oraz podwariant Assertive lub Turbulent.</p>
         <button class="button button-primary" data-action="start">Rozpocznij test <span aria-hidden="true">↗</span></button>
       </div>
-      <div class="intro-art" aria-hidden="true">
-        <div class="orbit orbit-large"></div>
-        <div class="orbit orbit-small"></div>
-        <div class="signal">01<br><span>poznaj<br>swoją<br>perspektywę</span></div>
-        <div class="dot dot-one"></div><div class="dot dot-two"></div><div class="dot dot-three"></div>
+      <div class="intro-art" aria-label="Panorama miasta i natury">
+        <div class="intro-art-caption"><span>MBTI / FIELD GUIDE</span><strong>Miasto idei.<br>Las charakterów.</strong></div>
+        <div class="intro-art-index">01 — 16</div>
       </div>
     </section>
 
@@ -63,6 +61,15 @@
         <div class="type-lockup"><span class="type-label">TYP</span><h2 id="result-title" data-type>INFP</h2></div>
         <p class="result-summary" data-summary></p>
       </div>
+      <section class="role-stage" data-role-stage aria-label="Awatar i najlepsza rola">
+        <div class="role-avatar" data-role-avatar aria-hidden="true">IN</div>
+        <div class="role-copy">
+          <p class="role-group" data-role-group>ANALITYCY</p>
+          <h3 data-role-title>Strateg wizji</h3>
+          <p data-role-description>Najlepiej działasz tam, gdzie można łączyć obraz całości z precyzją.</p>
+        </div>
+        <span class="role-coordinate">FIELD / 04</span>
+      </section>
       <div class="result-grid">
         <div class="result-card result-card-dark">
           <p class="card-label">Mapa preferencji</p>
@@ -86,7 +93,7 @@
       <div class="result-actions"><button class="button button-primary" data-action="restart">Spróbuj ponownie <span aria-hidden="true">↗</span></button><button class="text-button" data-action="print">Zapisz wynik</button></div>
     </section>
 
-    <footer class="footer"><span>PRZECHOWALNIE / 2026</span><span>TEST DO REFLEKSJI, NIE DO SZUFLADKOWANIA</span></footer>
+    <footer class="footer"><span>MBTI TEST / 2026</span><span>TEST DO REFLEKSJI, NIE DO SZUFLADKOWANIA</span></footer>
   </main>
   <script src="script.js"></script>
 </body>
