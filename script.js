@@ -79,6 +79,13 @@ const roleGroups = {
   ESFP: { label: 'Adventurers', className: 'group-adventurers', role: 'Reżyser doświadczeń', description: 'Tworzysz energię, która pozwala ludziom być razem naprawdę, nie tylko formalnie.', avatar: 'KO', scene: 'city' }
 };
 
+const avatarSymbols = {
+  INTJ: '<>', INTP: '?', ENTJ: 'GO', ENTP: 'NEW',
+  INFJ: 'MAP', INFP: 'ART', ENFJ: 'LINK', ENFP: 'SPARK',
+  ISTJ: 'OK', ISFJ: 'CARE', ESTJ: 'OPS', ESFJ: 'TEAM',
+  ISTP: 'FIX', ISFP: 'FORM', ESTP: 'NOW', ESFP: 'PLAY'
+};
+
 let current = 0;
 let answers = [];
 const screens = document.querySelectorAll('[data-screen]');
@@ -128,8 +135,9 @@ function renderResult() {
   document.querySelector('[data-subtype-name]').textContent = subtypeName;
   document.querySelector('[data-subtype-description]').textContent = subtypeDescription;
   const roleStage = document.querySelector('[data-role-stage]');
-  roleStage.className = `role-stage ${roleGroup.className} scene-${roleGroup.scene}`;
+  roleStage.className = `role-stage ${roleGroup.className} scene-${roleGroup.scene} type-${type}`;
   document.querySelector('[data-role-avatar]').textContent = roleGroup.avatar;
+  document.querySelector('[data-role-prop]').textContent = avatarSymbols[type];
   document.querySelector('[data-role-group]').textContent = roleGroup.label;
   document.querySelector('[data-role-title]').textContent = roleGroup.role;
   document.querySelector('[data-role-description]').textContent = roleGroup.description;
