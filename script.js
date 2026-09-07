@@ -86,6 +86,13 @@ const avatarSymbols = {
   ISTP: 'FIX', ISFP: 'FORM', ESTP: 'NOW', ESFP: 'PLAY'
 };
 
+const groupScenes = {
+  'group-analysts': 'lab',
+  'group-adventurers': 'yard',
+  'group-diplomats': 'room',
+  'group-sentinels': 'garden'
+};
+
 const avatarTraits = {
   INTJ: { tool: 'LAPTOP', shape: 'laptop', mood: 'focused' }, INTP: { tool: 'BOOK', shape: 'book', mood: 'curious' }, ENTJ: { tool: 'KEYS', shape: 'keys', mood: 'firm' }, ENTP: { tool: 'MARKER', shape: 'marker', mood: 'playful' },
   INFJ: { tool: 'COMPASS', shape: 'compass', mood: 'calm' }, INFP: { tool: 'PENCIL', shape: 'pencil', mood: 'soft' }, ENFJ: { tool: 'PHONE', shape: 'phone', mood: 'warm' }, ENFP: { tool: 'CAMERA', shape: 'camera', mood: 'bright' },
@@ -142,7 +149,7 @@ function renderResult() {
   document.querySelector('[data-subtype-name]').textContent = subtypeName;
   document.querySelector('[data-subtype-description]').textContent = subtypeDescription;
   const roleStage = document.querySelector('[data-role-stage]');
-  roleStage.className = `role-stage ${roleGroup.className} scene-${roleGroup.scene} type-${type}`;
+  roleStage.className = `role-stage ${roleGroup.className} scene-${groupScenes[roleGroup.className]} type-${type}`;
   document.querySelector('[data-role-avatar]').textContent = roleGroup.avatar;
   document.querySelector('[data-role-prop]').textContent = avatarSymbols[type];
   const tool = document.querySelector('[data-role-tool]');
