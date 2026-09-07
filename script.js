@@ -3,18 +3,42 @@ const questions = [
   { text: 'Zwykle pierwszy_a zaczynasz rozmowę z nową osobą.', axis: 'EI', positive: 'E' },
   { text: 'Lubisz, gdy wokół Ciebie dużo się dzieje.', axis: 'EI', positive: 'E' },
   { text: 'Myśli układają Ci się najlepiej, kiedy mówisz o nich na głos.', axis: 'EI', positive: 'E' },
+  { text: 'Po spotkaniu z ludźmi czujesz przypływ energii.', axis: 'EI', positive: 'E' },
+  { text: 'Chętnie zabierasz głos w większej grupie.', axis: 'EI', positive: 'E' },
+  { text: 'Wolisz dzielić się pomysłem od razu niż długo go dopracowywać w ciszy.', axis: 'EI', positive: 'E' },
+  { text: 'Łatwo nawiązujesz kontakt w nowym miejscu.', axis: 'EI', positive: 'E' },
   { text: 'Najpierw zauważasz konkretne fakty i szczegóły.', axis: 'SN', positive: 'S' },
   { text: 'Wolisz sprawdzone rozwiązania niż pełne ryzyka eksperymenty.', axis: 'SN', positive: 'S' },
+  { text: 'Przy planowaniu opierasz się głównie na tym, co już wiesz.', axis: 'SN', positive: 'S' },
+  { text: 'Cenisz instrukcje, które prowadzą krok po kroku.', axis: 'SN', positive: 'S' },
   { text: 'Często wyobrażasz sobie, co mogłoby wydarzyć się dalej.', axis: 'SN', positive: 'N' },
   { text: 'Łatwo dostrzegasz ukryte połączenia między odległymi ideami.', axis: 'SN', positive: 'N' },
+  { text: 'Bardziej interesują Cię możliwości niż obecny stan rzeczy.', axis: 'SN', positive: 'N' },
+  { text: 'Lubisz rozmawiać o znaczeniach, wzorach i tym, co dopiero może powstać.', axis: 'SN', positive: 'N' },
   { text: 'Podejmując decyzję, najpierw analizujesz jej logiczne konsekwencje.', axis: 'TF', positive: 'T' },
   { text: 'Trudno Ci odłożyć na bok emocje, gdy ktoś potrzebuje wsparcia.', axis: 'TF', positive: 'F' },
   { text: 'Spór traktujesz przede wszystkim jak problem do rozwiązania.', axis: 'TF', positive: 'T' },
   { text: 'Ważne jest dla Ciebie, aby decyzja była zgodna z Twoimi wartościami.', axis: 'TF', positive: 'F' },
+  { text: 'W dyskusji bardziej przekonują Cię argumenty niż sympatia do osoby.', axis: 'TF', positive: 'T' },
+  { text: 'Zanim ocenisz pomysł, zastanawiasz się, jak wpłynie na ludzi.', axis: 'TF', positive: 'F' },
+  { text: 'Potrafisz przekazać trudną uwagę bez owijania w bawełnę.', axis: 'TF', positive: 'T' },
+  { text: 'Dobra atmosfera jest dla Ciebie równie ważna jak skuteczność.', axis: 'TF', positive: 'F' },
   { text: 'Lubisz mieć plan i trzymać się ustalonego kierunku.', axis: 'JP', positive: 'J' },
   { text: 'Najlepiej działasz, gdy możesz zostawić sobie kilka opcji.', axis: 'JP', positive: 'P' },
   { text: 'Satysfakcję daje Ci domykanie spraw przed rozpoczęciem kolejnych.', axis: 'JP', positive: 'J' },
   { text: 'Często działasz spontanicznie, gdy pojawia się dobra okazja.', axis: 'JP', positive: 'P' }
+  ,{ text: 'Wolisz wiedzieć wcześniej, czego spodziewać się danego dnia.', axis: 'JP', positive: 'J' },
+  { text: 'Terminy mobilizują Cię dopiero wtedy, gdy są naprawdę blisko.', axis: 'JP', positive: 'P' },
+  { text: 'Porządek w planie daje Ci poczucie swobody.', axis: 'JP', positive: 'J' },
+  { text: 'Zmiana planów w ostatniej chwili potrafi być dla Ciebie ekscytująca.', axis: 'JP', positive: 'P' },
+  { text: 'Po trudnej sytuacji szybko odzyskujesz spokój i ruszasz dalej.', axis: 'AT', positive: 'A' },
+  { text: 'Rzadko długo rozpamiętujesz popełnione błędy.', axis: 'AT', positive: 'A' },
+  { text: 'Nawet pod presją ufasz swoim decyzjom.', axis: 'AT', positive: 'A' },
+  { text: 'Łatwo zachowujesz dystans, gdy ktoś krytykuje Twoją pracę.', axis: 'AT', positive: 'A' },
+  { text: 'Drobne problemy potrafią wracać do Ciebie myślami przez długi czas.', axis: 'AT', positive: 'T' },
+  { text: 'Często zastanawiasz się, czy na pewno podjąłeś_aś dobrą decyzję.', axis: 'AT', positive: 'T' },
+  { text: 'Krytyka mocno wpływa na Twoje samopoczucie.', axis: 'AT', positive: 'T' },
+  { text: 'Przed ważnym wydarzeniem wyobrażasz sobie różne trudne scenariusze.', axis: 'AT', positive: 'T' }
 ];
 
 const profiles = {
@@ -43,6 +67,7 @@ const show = (name) => screens.forEach((screen) => screen.classList.toggle('hidd
 const question = document.querySelector('[data-question]');
 const currentLabel = document.querySelector('[data-current]');
 const progress = document.querySelector('[data-progress]');
+document.querySelector('[data-total]').textContent = questions.length;
 
 function renderQuestion() {
   const item = questions[current];
@@ -53,30 +78,42 @@ function renderQuestion() {
 }
 
 function calculateType() {
-  const scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
+  const scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0, A: 0, Turbulent: 0 };
+  const opposite = { E: 'I', I: 'E', S: 'N', N: 'S', T: 'F', F: 'T', J: 'P', P: 'J', A: 'Turbulent', Turbulent: 'A' };
   questions.forEach((item, index) => {
-    const positiveScore = answers[index];
-    const opposite = { E: 'I', I: 'E', S: 'N', N: 'S', T: 'F', F: 'T', J: 'P', P: 'J' };
-    const strength = Math.abs(positiveScore - 2);
-    scores[item.positive] += positiveScore > 2 ? strength : 0;
-    scores[opposite[item.positive]] += positiveScore < 2 ? strength : 0;
+    const positiveScore = answers[index] ?? 2;
+    scores[item.positive] += positiveScore;
+    scores[opposite[item.positive]] += 4 - positiveScore;
   });
   const type = `${scores.E >= scores.I ? 'E' : 'I'}${scores.S >= scores.N ? 'S' : 'N'}${scores.T >= scores.F ? 'T' : 'F'}${scores.J >= scores.P ? 'J' : 'P'}`;
-  return { type, scores };
+  const subtype = scores.A >= scores.Turbulent ? 'A' : 'T';
+  return { type, subtype, scores };
 }
 
 function renderResult() {
-  const { type, scores } = calculateType();
+  const { type, subtype, scores } = calculateType();
   const [name, description] = profiles[type];
+  const subtypeName = subtype === 'A' ? 'Assertive' : 'Turbulent';
+  const subtypeDescription = subtype === 'A'
+    ? 'Zwykle zachowujesz spokój i zaufanie do siebie, nawet gdy sytuacja robi się wymagająca.'
+    : 'Mocno zauważasz napięcia i szczegóły sytuacji, co pomaga Ci reagować uważnie i rozwijać się.';
   document.querySelector('[data-type]').textContent = type;
   document.querySelector('[data-summary]').textContent = name;
   document.querySelector('[data-description]').textContent = description;
+  document.querySelector('[data-subtype-letter]').textContent = subtype;
+  document.querySelector('[data-subtype-name]').textContent = subtypeName;
+  document.querySelector('[data-subtype-description]').textContent = subtypeDescription;
   const pairs = [['E', 'I'], ['S', 'N'], ['T', 'F'], ['J', 'P']];
-  document.querySelector('[data-scales]').innerHTML = pairs.map(([left, right]) => {
+    const scaleMarkup = pairs.map(([left, right]) => {
     const total = scores[left] + scores[right] || 1;
-    const position = Math.round((scores[right] / total) * 100);
-    return `<div class="scale-row"><span>${left}</span><div class="scale-line"><i class="scale-marker" style="left: ${position}%"></i></div><span>${right}</span></div>`;
-  }).join('');
+    const leftPercent = Math.round((scores[left] / total) * 100);
+    const rightPercent = 100 - leftPercent;
+    return `<div class="scale-row"><span>${left} <b>${leftPercent}%</b></span><div class="scale-line"><i class="scale-marker" style="left: ${rightPercent}%"></i></div><span>${right} <b>${rightPercent}%</b></span></div>`;
+    }).join('');
+    const subtypeTotal = scores.A + scores.Turbulent || 1;
+    const assertivePercent = Math.round((scores.A / subtypeTotal) * 100);
+    const turbulentPercent = 100 - assertivePercent;
+    document.querySelector('[data-scales]').innerHTML = `${scaleMarkup}<div class="scale-row subtype-scale"><span>A <b>${assertivePercent}%</b></span><div class="scale-line"><i class="scale-marker" style="left: ${turbulentPercent}%"></i></div><span>T <b>${turbulentPercent}%</b></span></div>`;
   show('result');
 }
 
