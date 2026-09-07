@@ -87,10 +87,10 @@ const avatarSymbols = {
 };
 
 const avatarTraits = {
-  INTJ: { tool: 'TABLET', mood: 'focused' }, INTP: { tool: 'NOTES', mood: 'curious' }, ENTJ: { tool: 'KEYS', mood: 'firm' }, ENTP: { tool: 'MARKER', mood: 'playful' },
-  INFJ: { tool: 'MAPA', mood: 'calm' }, INFP: { tool: 'PENCIL', mood: 'soft' }, ENFJ: { tool: 'PHONE', mood: 'warm' }, ENFP: { tool: 'CAMERA', mood: 'bright' },
-  ISTJ: { tool: 'LISTA', mood: 'steady' }, ISFJ: { tool: 'MUG', mood: 'kind' }, ESTJ: { tool: 'CLIP', mood: 'firm' }, ESFJ: { tool: 'BAG', mood: 'warm' },
-  ISTP: { tool: 'TOOLS', mood: 'alert' }, ISFP: { tool: 'MUSIC', mood: 'dreamy' }, ESTP: { tool: 'WATCH', mood: 'bold' }, ESFP: { tool: 'HEADSET', mood: 'joyful' }
+  INTJ: { tool: 'LAPTOP', shape: 'laptop', mood: 'focused' }, INTP: { tool: 'BOOK', shape: 'book', mood: 'curious' }, ENTJ: { tool: 'KEYS', shape: 'keys', mood: 'firm' }, ENTP: { tool: 'MARKER', shape: 'marker', mood: 'playful' },
+  INFJ: { tool: 'COMPASS', shape: 'compass', mood: 'calm' }, INFP: { tool: 'PENCIL', shape: 'pencil', mood: 'soft' }, ENFJ: { tool: 'PHONE', shape: 'phone', mood: 'warm' }, ENFP: { tool: 'CAMERA', shape: 'camera', mood: 'bright' },
+  ISTJ: { tool: 'CHECKLIST', shape: 'checklist', mood: 'steady' }, ISFJ: { tool: 'MUG', shape: 'mug', mood: 'kind' }, ESTJ: { tool: 'CLIPBOARD', shape: 'clipboard', mood: 'firm' }, ESFJ: { tool: 'TOTE BAG', shape: 'bag', mood: 'warm' },
+  ISTP: { tool: 'WRENCH', shape: 'wrench', mood: 'alert' }, ISFP: { tool: 'HEADPHONES', shape: 'headphones', mood: 'dreamy' }, ESTP: { tool: 'WATCH', shape: 'watch', mood: 'bold' }, ESFP: { tool: 'MICROPHONE', shape: 'microphone', mood: 'joyful' }
 };
 
 let current = 0;
@@ -145,7 +145,9 @@ function renderResult() {
   roleStage.className = `role-stage ${roleGroup.className} scene-${roleGroup.scene} type-${type}`;
   document.querySelector('[data-role-avatar]').textContent = roleGroup.avatar;
   document.querySelector('[data-role-prop]').textContent = avatarSymbols[type];
-  document.querySelector('[data-role-tool]').textContent = avatarTraits[type].tool;
+  const tool = document.querySelector('[data-role-tool]');
+  tool.textContent = avatarTraits[type].tool;
+  tool.className = `avatar-tool tool-${avatarTraits[type].shape}`;
   roleStage.dataset.mood = avatarTraits[type].mood;
   document.querySelector('[data-role-group]').textContent = roleGroup.label;
   document.querySelector('[data-role-title]').textContent = roleGroup.role;
